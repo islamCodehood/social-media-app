@@ -12,8 +12,7 @@ function App() {
 	const [currentId, setCurrentId] = useState(null)
 	useEffect(() => {
 		dispatch(getPosts());
-	}, [dispatch]);
-
+	}, [currentId, dispatch]);
 
 	
 	return (
@@ -26,11 +25,11 @@ function App() {
 			</AppBar>
 			<Grow in>
 				<Container>
-					<Grid container justifyContent="space-between" align-items="stretch" spacing={3}>
-						<Grid item xs={12} sm={12} md={7} order={{xs: 2, sm: 2}}>
+					<Grid container className={classes.mainContainer} justifyContent="space-between" align-items="stretch" spacing={3}>
+						<Grid item xs={12} sm={12} md={7}>
 							<Posts setCurrentId={setCurrentId} />
 						</Grid>
-						<Grid item xs={12} sm={8} md={5} order={{xs: 1, sm: 1}}>
+						<Grid item xs={12} sm={12} md={5} >
 							<Form currentId={currentId} setCurrentId={setCurrentId} />
 						</Grid>
 					</Grid>
