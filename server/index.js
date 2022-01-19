@@ -14,15 +14,19 @@ app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 app.use("/posts", postRoutes);
-app.get("/", (req,res) => {
-	res.send("Hello")
-})
+app.get("/", (req, res) => {
+  res.send("Hello");
+});
 mongoose
-	.connect(process.env.CONNECTION_URL, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-	})
-	.then(() => app.listen(process.env.PORT, () => console.log(`server running at port: ${process.env.PORT}`)))
-	.catch((err) => {
-		console.log(err.message);
-	});
+  .connect(process.env.CONNECTION_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() =>
+    app.listen(process.env.PORT, () =>
+      console.log(`server running at port: ${process.env.PORT}`)
+    )
+  )
+  .catch((err) => {
+    console.log(err.message);
+  });
