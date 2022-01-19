@@ -14,7 +14,9 @@ app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 app.use("/posts", postRoutes);
-
+app.get("/", (req,res) => {
+	res.send("Hello")
+})
 mongoose
 	.connect(process.env.CONNECTION_URL, {
 		useNewUrlParser: true,
