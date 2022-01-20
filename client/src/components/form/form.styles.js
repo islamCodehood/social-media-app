@@ -18,7 +18,12 @@ export default makeStyles((theme) => ({
     width: "97%",
     margin: "10px 0",
   },
-  buttonSubmit: {
-    marginBottom: 10,
+  submitButton: {
+    flexGrow: 1,
+    marginRight: "10px",
   },
+  clearButton: {
+    background: "grey",
+    color: "white",
+  }
 }));
