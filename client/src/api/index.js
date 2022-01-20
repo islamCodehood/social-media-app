@@ -1,6 +1,9 @@
 import axios from "axios";
+//prod URL
+//const url = "https://social-app-is.herokuapp.com/posts";
 
-const url = "https://social-app-is.herokuapp.com/posts";
+//dev URL
+const url = "http://localhost:5000/posts";
 
 export const fetchPosts = () => axios.get(url);
 
