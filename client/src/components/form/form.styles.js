@@ -25,5 +25,5 @@ export default makeStyles((theme) => ({
   clearButton: {
     background: "grey",
     color: "white",
-  }
+  },
 }));
