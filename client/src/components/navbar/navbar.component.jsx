@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { AppBar, Typography, ToolBar, Button, Avatar } from "@material-ui/core";
+import { AppBar, Typography, Toolbar, Button, Avatar } from "@material-ui/core";
 import useStyles from "./navbar.styles.js";
 import memories from "../../images/memories.png";
 
@@ -15,7 +15,7 @@ const NavBar = () => {
 				</Typography>
 				<img className={classes.image} src={memories} alt="memories" height="90" />
 			</div>
-			<ToolBar className={classes.toolbar}>
+			<Toolbar className={classes.toolbar}>
 				{user ? (
 					<div className={classes.profile}>
 						<Avatar className={classes.purple} alt={user.result.name} src={user.result.imageUrl}>{user.result.name.charAt(0)}</Avatar>
@@ -25,7 +25,7 @@ const NavBar = () => {
 				) : (
 					<Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
 				)}
-			</ToolBar>
+			</Toolbar>
 		</AppBar>
 	);
 };
