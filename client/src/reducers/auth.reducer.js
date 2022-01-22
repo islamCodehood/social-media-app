@@ -7,7 +7,7 @@ const reducer = (state = {authData: null}, action) => {
         case AUTH:
             return action?.payload;
         case LOGOUT:
-            return action.payload;
+            return {authData: null};
         default:
             return state;
     }
