@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import GoogleLogin from 'react-google-login'
-import { Typography, Paper, Avatar, Button, Grid, Container, TextField } from "@material-ui/core";
+import { Typography, Paper, Avatar, Button, Grid, Container } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import useStyles from "./auth.styles";
 import Input from "../../components/input/input.component";
 import Icon from "../../components/icon/icon.component";
-import{ signInwithGoogleAuth } from "../../actions/auth.actions"
 import  { useNavigate } from "react-router-dom"
 
 const Auth = () => {
@@ -16,10 +15,6 @@ const Auth = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
-  useSelector((state) => {
-    //console.log(state.auth)
-    localStorage.setItem('profile', JSON.stringify(state.auth));
-  })
 	const handleSubmit = () => {};
 	const handleChange = () => {};
   const handleShowPassword = () => {setShowPassword(prevShowPassword => !prevShowPassword);};
@@ -31,7 +26,8 @@ const Auth = () => {
     //console.log(res)
     const profileObj = res?.profileObj
     const token = res?.tokenId
-    dispatch(signInwithGoogleAuth({type: "AUTH", payload: {profileObj, token}}))
+    dispatch({type: "AUTH", payload: {profileObj, token}})
+    localStorage.setItem('profile', JSON.stringify({profileObj, token}));
     navigate('/', { replace: true })
   }
   const googleFailure = (err) => {
