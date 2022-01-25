@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import GoogleLogin from "react-google-login";
 import {
   Typography,
@@ -14,16 +14,33 @@ import useStyles from "./auth.styles";
 import Input from "../../components/input/input.component";
 import Icon from "../../components/icon/icon.component";
 import { useNavigate } from "react-router-dom";
-
+import { signin, signup } from '../../actions/auth.actions'
 const Auth = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [isSignup, setIsSignup] = useState(false);
+  const [ showPassword, setShowPassword ] = useState(false);
+  const [ isSignup, setIsSignup ] = useState(false);
+  const initialFormState = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  }
+  const [ formData, setFormData ] = useState(initialFormState)
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = () => {};
-  const handleChange = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isSignup) {
+      dispatch(signup(formData, history))
+    } else {
+      dispatch(signin(formData, history))
+    }
+  };
+  const handleChange = (e) => {
+    setFormData({...formData, [e.target.name] : e.target.value})
+  };
   const handleShowPassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
