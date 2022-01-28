@@ -33,9 +33,12 @@ const Auth = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isSignup) {
-      dispatch(signup(formData, history))
+      
+      dispatch(signup(formData))
+      navigate("/", { replace: true });
     } else {
-      dispatch(signin(formData, history))
+      dispatch(signin(formData))
+      navigate("/", { replace: true });
     }
   };
   const handleChange = (e) => {
