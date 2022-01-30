@@ -34,11 +34,11 @@ const Auth = () => {
     e.preventDefault();
     if (isSignup) {
       
-      dispatch(signup(formData))
-      navigate("/", { replace: true });
+      dispatch(signup(formData, navigate))
+
     } else {
-      dispatch(signin(formData))
-      navigate("/", { replace: true });
+      dispatch(signin(formData, navigate))
+      
     }
   };
   const handleChange = (e) => {
@@ -56,7 +56,7 @@ const Auth = () => {
     const profileObj = res?.profileObj;
     const token = res?.tokenId;
     dispatch({ type: "AUTH", payload: { profileObj, token } });
-    localStorage.setItem("profile", JSON.stringify({ profileObj, token }));
+    
     navigate("/", { replace: true });
   };
   const googleFailure = (err) => {
