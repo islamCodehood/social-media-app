@@ -12,7 +12,6 @@ const NavBar = () => {
   const location = useLocation();
   const logoutApp = () => {
     dispatch({ type: "LOGOUT", payload: null });
-    localStorage.clear();
     navigate("/", { replace: true });
     setUser(null);
   };
@@ -43,17 +42,17 @@ const NavBar = () => {
           <div className={classes.profile}>
             <Avatar
               className={classes.purple}
-              alt={user.profileObj?.givenName}
-              src={user.profileObj?.imageUrl}
+              alt={user.existingUser?.givenName}
+              src={user.existingUser?.imageUrl}
             >
-              {!user.profileObj.imageUrl
-                ? user.profileObj?.givenName.charAt(0)
+              {!user.existingUser.imageUrl
+                ? user.existingUser?.name.charAt(0)
                 : null}
             </Avatar>
             <Typography
               className={classes.userName}
               variant="h6"
-            >{`${user.profileObj?.givenName} ${user.profileObj?.familyName}`}</Typography>
+            >{user.existingUser?.name}</Typography>
             <Button
               variant="contained"
               color="secondary"
