@@ -42,17 +42,21 @@ const NavBar = () => {
           <div className={classes.profile}>
             <Avatar
               className={classes.purple}
-              alt={user.existingUser?.givenName}
-              src={user.existingUser?.imageUrl}
-            >
-              {!user.existingUser.imageUrl
-                ? user.existingUser?.name.charAt(0)
-                : null}
+              alt={user.user?.name}
+              src={user.user?.imageUrl}
+            >{
+              user.user.name.charAt(0)
+            }
+
             </Avatar>
             <Typography
               className={classes.userName}
               variant="h6"
-            >{user.existingUser?.name}</Typography>
+            >
+              {
+              user.user ? user.user.name : null
+            }
+            </Typography>
             <Button
               variant="contained"
               color="secondary"
