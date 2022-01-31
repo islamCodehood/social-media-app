@@ -49,7 +49,6 @@ const Auth = () => {
     setShowPassword(false);
   };
   const googleSuccess = (res) => {
-    //console.log(res)
     const user = res?.profileObj;
     const token = res?.tokenId;
     dispatch({ type: "AUTH", payload: { user, token } });
