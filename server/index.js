@@ -16,7 +16,7 @@ app.use(cors());
 
 //posts route
 app.use("/posts", postRoutes);
-//user route 
+//user route
 app.use("/user", userRoutes);
 
 app.get("/", (req, res) => {

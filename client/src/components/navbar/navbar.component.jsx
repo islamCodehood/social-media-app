@@ -44,18 +44,11 @@ const NavBar = () => {
               className={classes.purple}
               alt={user.user?.name}
               src={user.user?.imageUrl}
-            >{
-              user.user.name.charAt(0)
-            }
-
-            </Avatar>
-            <Typography
-              className={classes.userName}
-              variant="h6"
             >
-              {
-              user.user ? user.user.name : null
-            }
+              {user.user.name.charAt(0)}
+            </Avatar>
+            <Typography className={classes.userName} variant="h6">
+              {user.user ? user.user.name : null}
             </Typography>
             <Button
               variant="contained"

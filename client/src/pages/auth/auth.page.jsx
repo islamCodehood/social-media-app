@@ -14,18 +14,18 @@ import useStyles from "./auth.styles";
 import Input from "../../components/input/input.component";
 import Icon from "../../components/icon/icon.component";
 import { useNavigate } from "react-router-dom";
-import { signin, signup } from '../../actions/auth.actions'
+import { signin, signup } from "../../actions/auth.actions";
 const Auth = () => {
-  const [ showPassword, setShowPassword ] = useState(false);
-  const [ isSignup, setIsSignup ] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [isSignup, setIsSignup] = useState(false);
   const initialFormState = {
     firstName: "",
     lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
-  }
-  const [ formData, setFormData ] = useState(initialFormState)
+  };
+  const [formData, setFormData] = useState(initialFormState);
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -33,16 +33,13 @@ const Auth = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isSignup) {
-      
-      dispatch(signup(formData, navigate))
-
+      dispatch(signup(formData, navigate));
     } else {
-      dispatch(signin(formData, navigate))
-      
+      dispatch(signin(formData, navigate));
     }
   };
   const handleChange = (e) => {
-    setFormData({...formData, [e.target.name] : e.target.value})
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const handleShowPassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -56,7 +53,7 @@ const Auth = () => {
     const user = res?.profileObj;
     const token = res?.tokenId;
     dispatch({ type: "AUTH", payload: { user, token } });
-    
+
     navigate("/", { replace: true });
   };
   const googleFailure = (err) => {

@@ -42,29 +42,24 @@ export const deletePost = async (req, res) => {
 };
 
 export const likePost = async (req, res) => {
-  
   const { id: _id } = req.params;
   //if not a registered user
-  if (!req.userId) return res.json({ message: "unauthenticated"})
+  if (!req.userId) return res.json({ message: "unauthenticated" });
   const post = await Post.findById(_id);
-  
+
   //search for the user id in the array of likes containing liked user ids
-  const index = post.likes.findIndex(id => id === String(req.userId))
+  const index = post.likes.findIndex((id) => id === String(req.userId));
 
   if (index === -1) {
     //like the post
-    post.likes.push(req.userId)
+    post.likes.push(req.userId);
   } else {
     //dislikes the post
-    post.likes = post.likes.filter(id => id !== String(req.userId))
-    console.log(post.likes)
+    post.likes = post.likes.filter((id) => id !== String(req.userId));
+    console.log(post.likes);
   }
 
-  const updatedPost = await Post.findByIdAndUpdate(
-    _id,
-    post,
-    { new: true }
-  );
+  const updatedPost = await Post.findByIdAndUpdate(_id, post, { new: true });
 
   res.json(updatedPost);
 };

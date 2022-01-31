@@ -1,5 +1,7 @@
-# SOCIAL MEDIA APP 
--- (🌟 *STAR it if you found it useful.*)
+# SOCIAL MEDIA APP
+
+-- (🌟 _STAR it if you found it useful._)
+
 - React js, Redux
 - Node js, Express, Mongoose
 
