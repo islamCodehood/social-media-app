@@ -17,16 +17,13 @@ import useStyles from "./post.styles.js";
 
 const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
-  moment.relativeTimeThreshold("d", 25);
+  //moment.relativeTimeThreshold("d", 25);
   const dispatch = useDispatch();
   const del = () => {
-    console.log(post._id);
     dispatch(deletePost(post._id));
   };
   const like = () => {
-    console.log(post._id);
     dispatch(likePost(post._id));
-    console.log(post._id);
   };
   return (
     <Card className={classes.card}>
@@ -36,7 +33,7 @@ const Post = ({ post, setCurrentId }) => {
         title={post.title}
       />
       <div className={classes.overlay}>
-        <Typography variant="h6">{post.creator}</Typography>
+        <Typography variant="h6">{post.name}</Typography>
         <Typography variant="body2">
           {moment(post.createdAt).fromNow()}
         </Typography>
