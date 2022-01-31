@@ -53,9 +53,9 @@ const Auth = () => {
   };
   const googleSuccess = (res) => {
     //console.log(res)
-    const profileObj = res?.profileObj;
+    const user = res?.profileObj;
     const token = res?.tokenId;
-    dispatch({ type: "AUTH", payload: { profileObj, token } });
+    dispatch({ type: "AUTH", payload: { user, token } });
     
     navigate("/", { replace: true });
   };
