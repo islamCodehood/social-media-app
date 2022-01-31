@@ -12,7 +12,7 @@ export const getPosts = async (req, res) => {
 
 export const createPost = async (req, res) => {
   const post = req.body;
-  const newPost = new Post(post);
+  const newPost = new Post({...post, creator: req.userId});
   try {
     await newPost.save();
     res.status(201).json(newPost);
@@ -30,7 +30,6 @@ export const updatePost = async (req, res) => {
   //if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send("No post with that id");
   //Get the post and update it
   const updatedPost = await Post.findByIdAndUpdate(_id, post, { new: true });
-  console.log(updatedPost);
   res.status(200).json(updatedPost);
 };
 
@@ -56,7 +55,6 @@ export const likePost = async (req, res) => {
   } else {
     //dislikes the post
     post.likes = post.likes.filter((id) => id !== String(req.userId));
-    console.log(post.likes);
   }
 
   const updatedPost = await Post.findByIdAndUpdate(_id, post, { new: true });
