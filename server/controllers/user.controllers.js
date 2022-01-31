@@ -18,7 +18,7 @@ export const signin = async (req, res) => {
         const isPasswordCorrect = await bcrypt.compare(password, existingUser.password)
         if (!isPasswordCorrect) return res.status(400).json({message: 'Invalid credentials'})
         const token = jwt.sign({email: existingUser.email, id: existingUser._id}, process.env.JWT_SECRET , {expiresIn: "1h"})
-        return res.status(200).json({existingUser, token})
+        return res.status(200).json({user: existingUser, token})
 
     } catch (err) {
         return res.status(500).json({message: 'something went wrong.'})
@@ -36,8 +36,9 @@ export const signup = async (req, res) => {
         if (password !== confirmPassword) return res.status(400).json({ message: 'Passwords do not match'})
         const hashedPassword = await bcrypt.hash(password, 12)
         const newUser = await User.create({email, password: hashedPassword, name: `${firstName} ${lastName}`})
+        console.log(newUser)
         const token = jwt.sign({email: newUser.email, id: newUser._id}, process.env.JWT_SECRET, {expiresIn: "1h"})
-        return response(200).json({newUser, token})
+        return res.status(201).json({user: newUser, token})
     } catch (err) {
         return res.status(500).json({message: 'something went wrong.'})
     }
