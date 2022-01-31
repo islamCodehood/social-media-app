@@ -7,7 +7,6 @@ import useStyles from "./form.styles.js";
 
 const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({
-    creator: "",
     title: "",
     message: "",
     tags: [],
@@ -17,6 +16,7 @@ const Form = ({ currentId, setCurrentId }) => {
   const post = useSelector((state) =>
     currentId ? state.posts.find((p) => p._id === currentId) : null
   );
+  const user = JSON.parse(localStorage.getItem("profile"));
   useEffect(() => {
     if (post) {
       setPostData(post);
@@ -28,10 +28,9 @@ const Form = ({ currentId, setCurrentId }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (currentId) {
-      dispatch(updatePost(currentId, postData));
-      console.log(currentId);
+      dispatch(updatePost(currentId, {...postData, name: user?.user.name}));
     } else {
-      dispatch(createPost(postData));
+      dispatch(createPost({...postData, name: user?.user.name}));
     }
     clear();
   };
@@ -39,7 +38,6 @@ const Form = ({ currentId, setCurrentId }) => {
   const clear = () => {
     setCurrentId(null);
     setPostData({
-      creator: "",
       title: "",
       message: "",
       tags: [],
@@ -57,16 +55,6 @@ const Form = ({ currentId, setCurrentId }) => {
         <Typography variant="h6">
           {currentId ? "Editing" : "Creating"} a memory
         </Typography>
-        <TextField
-          name="creator"
-          variant="outlined"
-          label="Creator"
-          fullWidth
-          value={postData.creator}
-          onChange={(e) =>
-            setPostData({ ...postData, creator: e.target.value })
-          }
-        />
         <TextField
           name="title"
           variant="outlined"
