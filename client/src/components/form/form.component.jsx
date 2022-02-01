@@ -16,8 +16,8 @@ const Form = ({ currentId, setCurrentId }) => {
   const post = useSelector((state) =>
     currentId ? state.posts.find((p) => p._id === currentId) : null
   );
-  const user = useSelector((state) => state.auth.authData)
-  
+  const user = useSelector((state) => state.auth.authData);
+
   useEffect(() => {
     if (post) {
       setPostData(post);
@@ -29,14 +29,12 @@ const Form = ({ currentId, setCurrentId }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (currentId) {
-      dispatch(updatePost(currentId, {...postData, name: user?.user.name}));
+      dispatch(updatePost(currentId, { ...postData, name: user?.user.name }));
     } else {
-      dispatch(createPost({...postData, name: user?.user.name}));
+      dispatch(createPost({ ...postData, name: user?.user.name }));
     }
     clear();
   };
-
-  
 
   const clear = () => {
     setCurrentId(null);
@@ -49,16 +47,14 @@ const Form = ({ currentId, setCurrentId }) => {
   };
   return (
     <>
-    {
-      !user?.user ? 
-      (
+      {!user?.user ? (
         <Paper>
           <Typography variant="h6">
-            Please, sign in to be able to create memories and like others' memories.
+            Please, sign in to be able to create memories and like others'
+            memories.
           </Typography>
         </Paper>
-      ) :
-      (
+      ) : (
         <Paper className={classes.paper}>
           <form
             className={`${classes.root} ${classes.form}`}
@@ -75,7 +71,9 @@ const Form = ({ currentId, setCurrentId }) => {
               label="Title"
               fullWidth
               value={postData.title}
-              onChange={(e) => setPostData({ ...postData, title: e.target.value })}
+              onChange={(e) =>
+                setPostData({ ...postData, title: e.target.value })
+              }
             />
             <TextField
               name="message"
@@ -130,8 +128,7 @@ const Form = ({ currentId, setCurrentId }) => {
             </Button>
           </form>
         </Paper>
-      )
-    }
+      )}
     </>
   );
 };

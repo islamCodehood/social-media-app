@@ -12,7 +12,7 @@ export const getPosts = async (req, res) => {
 
 export const createPost = async (req, res) => {
   const post = req.body;
-  const newPost = new Post({...post, creator: req.userId});
+  const newPost = new Post({ ...post, creator: req.userId });
   try {
     await newPost.save();
     res.status(201).json(newPost);

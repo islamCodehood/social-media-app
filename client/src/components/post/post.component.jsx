@@ -20,8 +20,7 @@ const Post = ({ post, setCurrentId }) => {
   //moment.relativeTimeThreshold("d", 25);
   const dispatch = useDispatch();
 
-  const user = useSelector((state) => state.auth.authData)
-
+  const user = useSelector((state) => state.auth.authData);
 
   const del = () => {
     dispatch(deletePost(post._id));
@@ -70,7 +69,12 @@ const Post = ({ post, setCurrentId }) => {
         </Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
-        <Button size="small" color="primary" disabled={user ? false : true} onClick={() => like()}>
+        <Button
+          size="small"
+          color="primary"
+          disabled={user ? false : true}
+          onClick={() => like()}
+        >
           <ThumbUpAltIcon fontSize="small" />
           Like &nbsp;
           {post.likes.length}
