@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deletePost, likePost } from "../../actions/posts.actions";
 import {
   Card,
@@ -19,6 +19,10 @@ const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
   //moment.relativeTimeThreshold("d", 25);
   const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.auth.authData)
+
+
   const del = () => {
     dispatch(deletePost(post._id));
   };
@@ -42,6 +46,7 @@ const Post = ({ post, setCurrentId }) => {
         <Button
           style={{ color: "white" }}
           size="small"
+          disabled={user ? false : true}
           onClick={() => {
             setCurrentId(post._id);
           }}
@@ -65,7 +70,7 @@ const Post = ({ post, setCurrentId }) => {
         </Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
-        <Button size="small" color="primary" onClick={() => like()}>
+        <Button size="small" color="primary" disabled={user ? false : true} onClick={() => like()}>
           <ThumbUpAltIcon fontSize="small" />
           Like &nbsp;
           {post.likes.length}
@@ -73,6 +78,7 @@ const Post = ({ post, setCurrentId }) => {
         <Button
           size="small"
           color="primary"
+          disabled={user ? false : true}
           onClick={() => {
             del();
           }}
