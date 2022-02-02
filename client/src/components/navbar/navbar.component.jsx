@@ -16,8 +16,13 @@ const NavBar = () => {
     setUser(null);
   };
   useEffect(() => {
+    const prevtimeStamp = JSON.parse(localStorage.getItem("profile"))?.timeStamp
+    const timeNow = new Date().getTime()
+    if (timeNow - prevtimeStamp >= 30000) {
+      localStorage.clear()
+    }
     setUser(JSON.parse(localStorage.getItem("profile")));
-  }, [location]);
+  }, [location  ]);
 
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
