@@ -14,6 +14,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import moment from "moment";
 import useStyles from "./post.styles.js";
+import Likes from "../likes/likes.component";
 
 const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
@@ -21,7 +22,7 @@ const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.auth.authData);
-
+  
   const del = () => {
     dispatch(deletePost(post._id));
   };
@@ -75,9 +76,7 @@ const Post = ({ post, setCurrentId }) => {
           disabled={user ? false : true}
           onClick={() => like()}
         >
-          <ThumbUpAltIcon fontSize="small" />
-          Like &nbsp;
-          {post.likes.length}
+          <Likes likes={post.likes} />
         </Button>
         <Button
           size="small"
