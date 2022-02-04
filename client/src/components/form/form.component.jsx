@@ -4,6 +4,8 @@ import { createPost, updatePost } from "../../actions/posts.actions";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
 import FileBase from "react-file-base64";
 import useStyles from "./form.styles.js";
+import jwt_decode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({
@@ -17,6 +19,8 @@ const Form = ({ currentId, setCurrentId }) => {
     currentId ? state.posts.find((p) => p._id === currentId) : null
   );
   const user = useSelector((state) => state.auth.authData);
+
+  const navigate = useNavigate()
   useEffect(() => {
     if (post) {
       setPostData(post);
@@ -31,6 +35,14 @@ const Form = ({ currentId, setCurrentId }) => {
       dispatch(updatePost(currentId, { ...postData, name: user?.user.name }));
     } else {
       dispatch(createPost({ ...postData, name: user?.user.name }));
+    }
+    const token = user?.token;
+    if (token) {
+      const decodedToken = jwt_decode(token);
+      
+      if (decodedToken.exp * 1000 < new Date().getTime()) {
+        navigate("/", { replace: true });
+      }
     }
     clear();
   };
