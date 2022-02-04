@@ -20,7 +20,7 @@ const Form = ({ currentId, setCurrentId }) => {
   );
   const user = useSelector((state) => state.auth.authData);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   useEffect(() => {
     if (post) {
       setPostData(post);
@@ -39,7 +39,7 @@ const Form = ({ currentId, setCurrentId }) => {
     const token = user?.token;
     if (token) {
       const decodedToken = jwt_decode(token);
-      
+
       if (decodedToken.exp * 1000 < new Date().getTime()) {
         navigate("/", { replace: true });
       }

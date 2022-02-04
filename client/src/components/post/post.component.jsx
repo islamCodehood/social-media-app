@@ -29,7 +29,7 @@ const Post = ({ post, setCurrentId }) => {
     const token = user?.token;
     if (token) {
       const decodedToken = jwt_decode(token);
-      
+
       if (decodedToken.exp * 1000 < new Date().getTime()) {
         navigate("/", { replace: true });
       }
@@ -40,7 +40,7 @@ const Post = ({ post, setCurrentId }) => {
     const token = user?.token;
     if (token) {
       const decodedToken = jwt_decode(token);
-      
+
       if (decodedToken.exp * 1000 < new Date().getTime()) {
         navigate("/", { replace: true });
       }
