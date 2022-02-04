@@ -24,18 +24,17 @@ const NavBar = () => {
       localStorage.clear()
     }
     console.log(timeNow , prevtimeStamp) */
-    const token = user?.token
+    const token = user?.token;
     if (token) {
-      const decodedToken = jwt_decode(token)
-      console.log(decodedToken)
-    if (decodedToken.exp < new Date().getTime()) {
-      logoutApp()
-    }
+      const decodedToken = jwt_decode(token);
+      console.log(decodedToken);
+      if (decodedToken.exp < new Date().getTime()) {
+        logoutApp();
+      }
     }
     setUser(JSON.parse(localStorage.getItem("profile")));
-    
   }, [location]);
-  useSelector(state => console.log(state))
+  useSelector((state) => console.log(state));
 
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">

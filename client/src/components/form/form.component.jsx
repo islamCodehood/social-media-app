@@ -17,7 +17,6 @@ const Form = ({ currentId, setCurrentId }) => {
     currentId ? state.posts.find((p) => p._id === currentId) : null
   );
   const user = useSelector((state) => state.auth.authData);
-
   useEffect(() => {
     if (post) {
       setPostData(post);

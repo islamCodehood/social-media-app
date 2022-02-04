@@ -1,6 +1,9 @@
 import { AUTH, LOGOUT } from "../constants/actionTypes";
 
-const reducer = (state = { authData:  JSON.parse(localStorage.getItem('profile'))}, action) => {
+const reducer = (
+  state = { authData: JSON.parse(localStorage.getItem("profile")) },
+  action
+) => {
   switch (action.type) {
     case AUTH:
       localStorage.setItem("profile", JSON.stringify({ ...action?.payload }));

@@ -21,7 +21,7 @@ const Post = ({ post, setCurrentId }) => {
   moment.relativeTimeThreshold("d", 25);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.authData);
-  
+
   const del = () => {
     dispatch(deletePost(post._id));
   };
@@ -42,19 +42,18 @@ const Post = ({ post, setCurrentId }) => {
         </Typography>
       </div>
       <div className={classes.overlay2}>
-      {
-        (user?.user?._id === post.creator || user?.user?.googleId === post.creator) && (
-        <Button
-          style={{ color: "white" }}
-          size="small"
-          onClick={() => {
-            setCurrentId(post._id);
-          }}
-        >
-          <MoreHorizIcon fontSize="medium" />
-        </Button>
-        )
-      }
+        {(user?.user?._id === post.creator ||
+          user?.user?.googleId === post.creator) && (
+          <Button
+            style={{ color: "white" }}
+            size="small"
+            onClick={() => {
+              setCurrentId(post._id);
+            }}
+          >
+            <MoreHorizIcon fontSize="medium" />
+          </Button>
+        )}
       </div>
       <div className={classes.details}>
         <Typography variant="body2" color="textSecondary">
@@ -80,20 +79,19 @@ const Post = ({ post, setCurrentId }) => {
         >
           <Likes likes={post.likes} />
         </Button>
-        {
-          (user?.user?._id === post.creator || user?.user?.googleId === post.creator) && (
-        <Button
-          size="small"
-          color="primary"
-          onClick={() => {
-            del();
-          }}
-        >
-          <DeleteIcon fontSize="small" />
-          Delete
-        </Button>
-          )
-        }
+        {(user?.user?._id === post.creator ||
+          user?.user?.googleId === post.creator) && (
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => {
+              del();
+            }}
+          >
+            <DeleteIcon fontSize="small" />
+            Delete
+          </Button>
+        )}
       </CardActions>
     </Card>
   );
