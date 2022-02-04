@@ -18,9 +18,8 @@ import Likes from "../likes/likes.component";
 
 const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
-  //moment.relativeTimeThreshold("d", 25);
+  moment.relativeTimeThreshold("d", 25);
   const dispatch = useDispatch();
-
   const user = useSelector((state) => state.auth.authData);
   
   const del = () => {
@@ -43,16 +42,19 @@ const Post = ({ post, setCurrentId }) => {
         </Typography>
       </div>
       <div className={classes.overlay2}>
+      {
+        (user?.user?._id === post.creator || user?.user?.googleId === post.creator) && (
         <Button
           style={{ color: "white" }}
           size="small"
-          disabled={user ? false : true}
           onClick={() => {
             setCurrentId(post._id);
           }}
         >
           <MoreHorizIcon fontSize="medium" />
         </Button>
+        )
+      }
       </div>
       <div className={classes.details}>
         <Typography variant="body2" color="textSecondary">
@@ -73,15 +75,16 @@ const Post = ({ post, setCurrentId }) => {
         <Button
           size="small"
           color="primary"
-          disabled={user ? false : true}
+          /* disabled={user ? false : true} */
           onClick={() => like()}
         >
           <Likes likes={post.likes} />
         </Button>
+        {
+          (user?.user?._id === post.creator || user?.user?.googleId === post.creator) && (
         <Button
           size="small"
           color="primary"
-          disabled={user ? false : true}
           onClick={() => {
             del();
           }}
@@ -89,6 +92,8 @@ const Post = ({ post, setCurrentId }) => {
           <DeleteIcon fontSize="small" />
           Delete
         </Button>
+          )
+        }
       </CardActions>
     </Card>
   );
