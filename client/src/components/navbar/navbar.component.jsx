@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AppBar, Typography, Toolbar, Button, Avatar } from "@material-ui/core";
+import jwt_decode from "jwt-decode";
 import useStyles from "./navbar.styles.js";
 import memories from "../../images/memories.png";
 const NavBar = () => {
@@ -16,15 +17,25 @@ const NavBar = () => {
     setUser(null);
   };
   useEffect(() => {
-    const prevtimeStamp = JSON.parse(localStorage.getItem("profile"))?.timeStamp
+    /* const prevtimeStamp = JSON.parse(localStorage.getItem("profile"))?.timeStamp
     
     const timeNow = new Date().getTime()
     if (timeNow - prevtimeStamp >= 3600000) {
-      console.log(timeNow - prevtimeStamp)
       localStorage.clear()
     }
+    console.log(timeNow , prevtimeStamp) */
+    const token = user?.token
+    if (token) {
+      const decodedToken = jwt_decode(token)
+      console.log(decodedToken)
+    if (decodedToken.exp < new Date().getTime()) {
+      logoutApp()
+    }
+    }
     setUser(JSON.parse(localStorage.getItem("profile")));
+    
   }, [location]);
+  useSelector(state => console.log(state))
 
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
