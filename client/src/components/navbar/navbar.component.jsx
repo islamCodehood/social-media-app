@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { AppBar, Typography, Toolbar, Button, Avatar } from "@material-ui/core";
 import jwt_decode from "jwt-decode";
 import useStyles from "./navbar.styles.js";
