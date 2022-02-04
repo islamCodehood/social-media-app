@@ -15,18 +15,36 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import moment from "moment";
 import useStyles from "./post.styles.js";
 import Likes from "../likes/likes.component";
+import jwt_decode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
   moment.relativeTimeThreshold("d", 25);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.authData);
-
+  const navigate = useNavigate();
   const del = () => {
     dispatch(deletePost(post._id));
+    const token = user?.token;
+    if (token) {
+      const decodedToken = jwt_decode(token);
+      
+      if (decodedToken.exp * 1000 < new Date().getTime()) {
+        navigate("/", { replace: true });
+      }
+    }
   };
   const like = () => {
     dispatch(likePost(post._id));
+    const token = user?.token;
+    if (token) {
+      const decodedToken = jwt_decode(token);
+      
+      if (decodedToken.exp * 1000 < new Date().getTime()) {
+        navigate("/", { replace: true });
+      }
+    }
   };
   return (
     <Card className={classes.card}>
