@@ -5,7 +5,6 @@ import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 
 const Likes = ({likes}) => {
     const user = useSelector(state => state.auth.authData)
-
     if (likes.length > 0) {
         return (likes.find(id => id === user?.user?.googleId || id === user?.user?._id) ? (
             <>
