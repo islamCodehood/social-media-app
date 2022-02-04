@@ -17,24 +17,16 @@ const NavBar = () => {
     setUser(null);
   };
   useEffect(() => {
-    /* const prevtimeStamp = JSON.parse(localStorage.getItem("profile"))?.timeStamp
-    
-    const timeNow = new Date().getTime()
-    if (timeNow - prevtimeStamp >= 3600000) {
-      localStorage.clear()
-    }
-    console.log(timeNow , prevtimeStamp) */
     const token = user?.token;
     if (token) {
       const decodedToken = jwt_decode(token);
       console.log(decodedToken);
-      if (decodedToken.exp < new Date().getTime()) {
+      if (decodedToken.exp * 1000 < new Date().getTime()) {
         logoutApp();
       }
     }
     setUser(JSON.parse(localStorage.getItem("profile")));
   }, [location]);
-  useSelector((state) => console.log(state));
 
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
