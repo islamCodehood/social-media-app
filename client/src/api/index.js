@@ -1,8 +1,8 @@
 import axios from "axios";
 //prod URL
-//const API = axios.create({baseURL: 'https://social-app-is.herokuapp.coAPI
+const API = axios.create({baseURL: 'https://social-app-is.herokuapp.com'});
 //dev URL
-const API = axios.create({ baseURL: "http://localhost:5000" });
+//const API = axios.create({ baseURL: "http://localhost:5000" });
 
 //this will intercepts every request
 API.interceptors.request.use((req) => {
